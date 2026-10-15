@@ -1,0 +1,10 @@
+name: intelli_attend_shared
+description: Shared models, enums, and timetable evaluation engine for IntelliAttend Student & Faculty apps.
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  timezone: ^0.9.4

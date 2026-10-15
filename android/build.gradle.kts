@@ -1,0 +1,36 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+val newBuildDir: Directory =
+    rootProject.layout.buildDirectory
+        .dir("../../build")
+        .get()
+rootProject.layout.buildDirectory.value(newBuildDir)
+
+subprojects {
+    val newSubprojectBuildDir: Directory = newBuildDir.dir(project.name)
+    project.layout.buildDirectory.value(newSubprojectBuildDir)
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+gradle.beforeProject {
+    if (project.path != ":app" && project.plugins.hasPlugin("com.android.library")) {
+        try {
+            val android = project.extensions.getByType(com.android.build.gradle.LibraryExtension::class.java)
+            if (android.namespace == null) {
+                val ns = project.findProperty("GROUP") as? String
+                    ?: "com.example.${project.name.replace("-", ".")}"
+                android.namespace = ns
+            }
+        } catch (_: Exception) {}
+    }
+}
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.layout.buildDirectory)
+}

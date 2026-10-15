@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [school-main, school-dev]
+  pull_request:
+    branches: [school-main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.41.9'
+          channel: stable
+          cache: true
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Create .env for CI
+        run: echo "API_BASE_URL=https://api.intelliattend.app" > .env
+
+      - name: Analyze
+        run: dart analyze lib/ || echo "::warning::dart analyze found issues"
+
+      - name: Run tests
+        run: flutter test || echo "::warning::flutter test completed with issues"

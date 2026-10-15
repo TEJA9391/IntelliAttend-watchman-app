@@ -1,0 +1,17 @@
+* @BalaSeethaRamanjaneyulu
+
+# Cosmetic/UI files - friend can work here (still needs PR review)
+/lib/presentation/ @BalaSeethaRamanjaneyulu
+/lib/Theme/ @BalaSeethaRamanjaneyulu
+/assets/ @BalaSeethaRamanjaneyulu
+
+# Critical files - DO NOT TOUCH
+/lib/Core/ @BalaSeethaRamanjaneyulu
+/lib/Data/ @BalaSeethaRamanjaneyulu
+/lib/Services/ @BalaSeethaRamanjaneyulu
+/lib/engine/ @BalaSeethaRamanjaneyulu
+/lib/main.dart @BalaSeethaRamanjaneyulu
+/android/ @BalaSeethaRamanjaneyulu
+/ios/ @BalaSeethaRamanjaneyulu
+/web/ @BalaSeethaRamanjaneyulu
+/windows/ @BalaSeethaRamanjaneyulu
