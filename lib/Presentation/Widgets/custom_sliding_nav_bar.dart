@@ -1,9 +1,9 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intelli_attend_faculty/Theme/app_theme.dart';
 import 'package:intelli_attend_faculty/Services/haptic_service.dart';
+import 'qr_scan_logo.dart';
 
 class CustomSlidingNavBar extends StatefulWidget {
   final int currentIndex;
@@ -28,7 +28,7 @@ class _CustomSlidingNavBarState extends State<CustomSlidingNavBar> {
   Widget build(BuildContext context) {
     final bool isDark = Theme.of(context).brightness == Brightness.dark;
     final Color inactiveColor = isDark ? const Color(0xFF8E8E93) : const Color(0xFF94A3B8);
-    final Color activeColor = AppTheme.accentTeal;
+    const Color activeColor = AppTheme.accentTeal;
     final double bottomInset = MediaQuery.of(context).padding.bottom;
     final Color navBgColor = isDark ? const Color(0xFF16161A) : Colors.white;
 
@@ -69,7 +69,7 @@ class _CustomSlidingNavBarState extends State<CustomSlidingNavBar> {
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(isDark ? 0.45 : 0.08),
+                        color: Colors.black.withValues(alpha: isDark ? 0.45 : 0.08),
                         blurRadius: 20,
                         offset: const Offset(0, -4),
                       ),
@@ -84,8 +84,8 @@ class _CustomSlidingNavBarState extends State<CustomSlidingNavBar> {
                         border: Border(
                           top: BorderSide(
                             color: isDark
-                                ? Colors.white.withOpacity(0.08)
-                                : Colors.black.withOpacity(0.06),
+                                ? Colors.white.withValues(alpha: 0.08)
+                                : Colors.black.withValues(alpha: 0.06),
                             width: 1,
                           ),
                         ),
@@ -181,17 +181,16 @@ class _CustomSlidingNavBarState extends State<CustomSlidingNavBar> {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(isDark ? 0.40 : 0.15),
+                                color: Colors.black.withValues(alpha: isDark ? 0.40 : 0.15),
                                 blurRadius: 10,
                                 offset: const Offset(0, 3),
                               ),
                             ],
                           ),
                           child: const Center(
-                            child: Icon(
-                              Icons.qr_code_scanner_rounded,
-                              color: Colors.white,
+                            child: QrScanLogo(
                               size: 26,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -251,7 +250,7 @@ class _CustomSlidingNavBarState extends State<CustomSlidingNavBar> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
               decoration: BoxDecoration(
                 color: isSelected
-                    ? activeColor.withOpacity(isDark ? 0.15 : 0.10)
+                    ? activeColor.withValues(alpha: isDark ? 0.15 : 0.10)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(16),
               ),
